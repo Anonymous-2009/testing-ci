@@ -44,7 +44,7 @@ pipeline {
         stage('Trigger CD Pipeline') {
             steps {
                 echo "Triggering CD pipeline with image tag: ${IMAGE_TAG}"
-                build job: 'CD-pipelines', parameters: [
+                build job: 'CD-for-hub', parameters: [
                     string(name: 'IMAGE_TAG', value: "${env.IMAGE_TAG}")
                 ], wait: false
             }
