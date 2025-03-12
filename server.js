@@ -6,6 +6,11 @@ app.get('/', (req, res) => {
   res.send('Hello World! hey gitops done where')
 })
 
+app.get('/gitops', (req, res) => {
+  res.send('finally code it and at night impelement this')
+})
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
