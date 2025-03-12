@@ -1,9 +1,12 @@
 const express = require('express')
+
 const app = express()
 const port = 3030
+require('dotenv').config();
 
 app.get('/', (req, res) => {
-  res.send('Hello World! hey gitops done where')
+  const name = process.env.NAMEW
+  res.send(`Hello World! hey gitops done where ${name}`)
 })
 
 app.get('/gitops', (req, res) => {
