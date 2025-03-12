@@ -9,3 +9,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+// kubectl port-forward service/my-express-app-service  -n testing 2000:80
