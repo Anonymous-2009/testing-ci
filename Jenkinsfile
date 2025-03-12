@@ -44,19 +44,39 @@ pipeline {
       
     }
     
-    post {
+   post {
         success {
-            echo "Build & Push successful."
-            emailext subject: "Jenkins Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                     body: "Build and push completed successfully. Docker Image: ${DOCKER_HUB_REPO}",
-                     to: 'krishnabag751@gmail.com'
+            emailext attachLog: true,
+                subject: "MarketVerse Build #${env.BUILD_NUMBER} - SUCCESS ✅",
+                body: """
+                    <html>
+                    <body>
+                        <h3 style="color: green;">✅ Build Successful!</h3>
+                        <p>Project: <b>${env.JOB_NAME}</b></p>
+                        <p>Build Number: <b>${env.BUILD_NUMBER}</b></p>
+                        <p>URL: <a href='${env.BUILD_URL}'>Jenkins Build Link</a></p>
+                    </body>
+                    </html>
+                """,
+                to: 'krishnabag751@gmail.com',
+                mimeType: 'text/html'
         }
 
         failure {
-            echo "Build failed!"
-            emailext subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                     body: "Jenkins build has failed. Check logs for details.",
-                     to: 'krishnabag751@gmail.com'
+            emailext attachLog: true,
+                subject: "MarketVerse Build #${env.BUILD_NUMBER} - ❌ FAILED",
+                body: """
+                    <html>
+                    <body>
+                        <h3 style="color: red;">❌ Build Failed!</h3>
+                        <p>Project: <b>${env.JOB_NAME}</b></p>
+                        <p>Build Number: <b>${env.BUILD_NUMBER}</b></p>
+                        <p>Check the logs for more details.</p>
+                    </body>
+                    </html>
+                """,
+                to: 'krishnabag751@gmail.com',
+                mimeType: 'text/html'
         }
     }
 }
